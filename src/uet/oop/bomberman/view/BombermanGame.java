@@ -99,51 +99,6 @@ public class BombermanGame  {
             fadeTransition.play();
         }catch (FileNotFoundException e){}
 
-
-
-
-
-        mainScene.setOnKeyPressed(event -> {
-            KeyCode key = event.getCode();
-
-            if (key == KeyCode.A || key == KeyCode.LEFT) {
-                // bomberman.setVelX(-5);
-                Component.left(bomberman);
-
-            } else if (key == KeyCode.D || key == KeyCode.RIGHT) {
-                // bomberman.setVelX(5);
-                Component.right(bomberman);
-            } else if (key == KeyCode.W || key == KeyCode.UP) {
-                // bomberman.setVelY(-5);
-                Component.up(bomberman);
-            } else if (key == KeyCode.S || key == KeyCode.DOWN) {
-                // bomberman.setVelY(5);
-                Component.down(bomberman);
-            }
-            //
-            else if (key == KeyCode.SPACE) {
-                Bomb.putBomb();
-            }
-        });
-
-        // mainScene.setOnKeyReleased(event -> {
-        //     KeyCode key = event.getCode();
-
-        //     if (key == KeyCode.A || key == KeyCode.LEFT) {
-        //         bomberman.setVelX(0);
-        //         Component.left(bomberman);
-        //     } else if (key == KeyCode.D || key == KeyCode.RIGHT) {
-        //         bomberman.setVelX(0);
-        //         Component.right(bomberman);
-        //     } else if (key == KeyCode.W || key == KeyCode.UP) {
-        //         bomberman.setVelY(0);
-        //         Component.up(bomberman);
-        //     } else if (key == KeyCode.S || key == KeyCode.DOWN) {
-        //         bomberman.setVelY(0);
-        //         Component.down(bomberman);
-        //     }
-        // });
-
         // Add mainScene vao stage
         stage.setScene(mainScene);
         stage.setTitle("Bomberman");
@@ -152,11 +107,14 @@ public class BombermanGame  {
         // Tao map
         createMap();
 
+        // Tao enemy testing
+        balloom = new Ballom(WIDTH - 2, HEIGHT - 2, Sprite.balloom_left1.getFxImage());
+        entities.add(balloom);
+
         // Tao bomber
         bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
         entities.add(bomberman);
-        balloom = new Ballom(WIDTH/2-2, HEIGHT /2-2 , Sprite.balloom_left1.getFxImage());
-        entities.add(balloom);
+
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
@@ -168,53 +126,62 @@ public class BombermanGame  {
     }
 
     public void createMap() {
-        for (int i = 0; i < WIDTH; i++) {
-            for (int j = 0; j < HEIGHT; j++) {
-                Entity object;
-                if (j == 0 || j == HEIGHT - 1 || i == 0 || i == WIDTH - 1) {
-                    object = new Wall(i, j, Sprite.wall.getFxImage());
-                } else {
-                    object = new Grass(i, j, Sprite.grass.getFxImage());
-                }
-                stillObjects.add(object);
-            }
-        }
         //Create map
         waitToLevelUp();
     }
 
-    // moves the bomberman.
-    public void position() {
-        // bomberman.setX(bomberman.getX() + Entity.getVelX());
-        // bomberman.setY(bomberman.getY() + Entity.getVelY());
-    }
-
     private void updatePlayerInput() {
         // KeyPressed
-        // getMainScene().setOnKeyPressed(Bomber::move);
+        mainScene.setOnKeyPressed(event -> {
+            KeyCode key = event.getCode();
 
-        // getMainScene().setOnKeyReleased(Bomber::stop);
-
-        position();
+            if (key == KeyCode.A || key == KeyCode.LEFT) {
+                // bomberman.setVelX(-5);
+                Component.left(bomberman);
+            } else if (key == KeyCode.D || key == KeyCode.RIGHT) {
+                // bomberman.setVelX(5);
+                Component.right(bomberman);
+            } else if (key == KeyCode.W || key == KeyCode.UP) {
+                // bomberman.setVelY(-5);
+                Component.up(bomberman);
+            } else if (key == KeyCode.S || key == KeyCode.DOWN) {
+                // bomberman.setVelY(5);
+                Component.down(bomberman);
+            }
+            else if (key == KeyCode.SPACE) {
+                Bomb.putBomb();
+            }
+        });
     }
 
     public void update() {
         updatePlayerInput();
+
+        entities.forEach(Entity::update);
+        stillObjects.forEach(Entity::update);
+        bomberman.update();
 
         bomberman.setCountToRun(bomberman.getCountToRun() + 1);
         if (bomberman.getCountToRun() == 4) {
             Component.checkRun(bomberman);
             bomberman.setCountToRun(0);
         }
-        balloom.update();
+
         balloom.setCountToRun(balloom.getCountToRun() + 1);
-        if (balloom.getCountToRun() == 6  ) {
+        if (balloom.getCountToRun() == 12) {
             Component.checkRun(balloom);
             balloom.setCountToRun(0);
         }
-        entities.forEach(Entity::update);
-        bomberman.update();
-        stillObjects.forEach(Entity::update);
+
+        for (Entity a : entities) {
+            a.setCountToRun(a.getCountToRun() + 1);
+            if (a.getCountToRun() == 8) {
+                Component.checkRun(a);
+                a.setCountToRun(0);
+            }
+        }
+
+//        waitToLevelUp();
     }
 
     public void render() {
@@ -222,6 +189,5 @@ public class BombermanGame  {
         stillObjects.forEach(g -> g.render(gc));
         entities.forEach(g -> g.render(gc));
         bomberman.render(gc);
-        balloom.render(gc);
     }
 }
