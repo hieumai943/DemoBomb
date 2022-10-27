@@ -1,4 +1,4 @@
-package bomberman.entities.animal.intelligent;
+package bomberman.entities.AI;
 
 public class Node {
     private int h;

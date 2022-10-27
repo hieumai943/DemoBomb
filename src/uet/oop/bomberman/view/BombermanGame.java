@@ -77,21 +77,21 @@ public class BombermanGame  {
         // Tao mainScene
         mainScene = new Scene(root);
         FadeTransition fade = new FadeTransition();
-        fade.setDuration(Duration.millis(1000));
+        fade.setDuration(Duration.millis(2000));
         fade.setFromValue(0);
         fade.setToValue(1);
         fade.setNode(root);
         fade.play();
         FadeTransition fadeTransition = new FadeTransition();
         try {
-            Image logo = new Image(new FileInputStream("src\\uet\\resources\\Level-01.png"));
+            Image logo = new Image(new FileInputStream("src\\uet\\resources\\Level1.png"));
             ImageView img = new ImageView();
             img.setImage(logo);
-            img.setLayoutX(230);
-            img.setLayoutY(100);
+            img.setLayoutX(0);
+            img.setLayoutY(0);
             root.getChildren().add(img);
 
-            fadeTransition.setDuration(Duration.millis(4000));
+            fadeTransition.setDuration(Duration.millis(3000));
             fadeTransition.setFromValue(10);
 
             fadeTransition.setToValue(0);
