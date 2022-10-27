@@ -2,11 +2,9 @@ package bomberman.components;
 
 import bomberman.entities.Entity;
 
+import static bomberman.PvPGame.id_objects;
 
-import static bomberman.BombermanGame.id_objects;
-
-
-public class Blocked {
+public class PvPBlocked {
     public static boolean block_down(Entity entity) {   //Create a blocked that prevent all mob go down through the object
         return id_objects[entity.getX() / 32][entity.getY() / 32 + 1] == 0;
     }

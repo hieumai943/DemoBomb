@@ -4,7 +4,7 @@ import bomberman.entities.*;
 import bomberman.graphics.*;
 import javafx.scene.image.Image;
 
-import static bomberman.view.BombermanGame.*;
+import static bomberman.BombermanGame.*;
 
 public class SpeedItem extends Items{
     public static int speed = 1;

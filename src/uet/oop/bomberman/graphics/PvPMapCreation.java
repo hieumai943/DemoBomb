@@ -1,36 +1,30 @@
 package bomberman.graphics;
 
-
-
+import bomberman.PvPGame;
 import bomberman.entities.*;
-import bomberman.entities.object.Brick;
+import bomberman.entities.PvP.Player2Bomb;
+import bomberman.entities.PvP.PvPBrick;
 import bomberman.entities.object.Grass;
 import bomberman.entities.object.Portal;
 import bomberman.entities.object.Wall;
-import bomberman.BombermanGame;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-
-import static bomberman.BombermanGame.*;
-
-
-public class MapCreation  {
-    public MapCreation(String level) throws FileNotFoundException {
+import static bomberman.PvPGame.*;
+public class PvPMapCreation {
+    public PvPMapCreation(String level) {
         System.out.println(System.getProperty("user.dir"));
-        String path = getClass().getResource("Level1.txt").getPath();
-        File fileName = new File (path);                     // Create object fileName from class File in File library imported.
+        File fileName = new File("res/levels/PvPMap.txt");                      // Create object fileName from class File in File library imported.
         try (FileReader inputFile = new FileReader(fileName)) {     // Try to create new object from class FileReader.
             Scanner ip = new Scanner(inputFile);                    // Create object ip from class Scanner.
             String line = ip.nextLine();                            // Input variable line in string data type.
             //System.out.println("1");
             //StringTokenizer
             StringTokenizer tokens = new StringTokenizer(line);
-            BombermanGame.level = Integer.parseInt(tokens.nextToken());
+            PvPGame.level = Integer.parseInt(tokens.nextToken());
             // Create object tokens from class StringTokenizer in library imported.
             height = Integer.parseInt(tokens.nextToken());
             width = Integer.parseInt(tokens.nextToken());
@@ -62,16 +56,14 @@ public class MapCreation  {
                                 entity = new Wall(j, i, Sprite.wall.getFxImage());          // In case 2, set entity object equal to object wall with scaled size.
                                 break;
                             case 3:
-                                entity = new Brick(j, i, Sprite.brick.getFxImage());        // In case 3, set entity object equal to object brick with scaled size.
+                                entity = new PvPBrick(j, i, Sprite.brick.getFxImage());        // In case 3, set entity object equal to object brick with scaled size.
                                 break;
                             default:
                                 entity = new Grass(j, i, Sprite.grass.getFxImage());
                         }
                         id_objects[j][i] = token;        //
-//                        System.out.print(id_objects[j][i] + " ");
-                        stillObjects.add(entity);              //
+                        stillObjectsPvP.add(entity);              //
                     }
-//                    System.out.println();
                 }
             }
         } catch (IOException e) {                       // Catch exception
@@ -80,5 +72,4 @@ public class MapCreation  {
             System.out.println("loi");
         }
     }
-
 }

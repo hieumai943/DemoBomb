@@ -1,9 +1,9 @@
 package bomberman.entities;
 
-import bomberman.entities.animal.Animal;
+
 import javafx.scene.image.Image;
 
-public class Bomber  extends Animal {
+public class Bomber  extends Entity {
 
     public static int swap_kill = 1;
 

@@ -1,10 +1,11 @@
-package bomberman.entities;
+package bomberman.entities.enemy;
 
-import bomberman.components.Component;
+import bomberman.components.ComponentMovement;
+import bomberman.entities.Entity;
 import bomberman.graphics.Sprite;
 import javafx.scene.image.Image;
 
-import static bomberman.view.BombermanGame.*;
+import static bomberman.BombermanGame.*;
 
 public class Oneal extends Entity {
     private static int swap_kill = 1;
@@ -26,16 +27,25 @@ public class Oneal extends Entity {
     public Oneal() {
 
     }
+    private void kill() {
+        for (Entity entity : entities) {
+            if (list_kill[entity.getX() / 32][entity.getY() / 32] == 4) {
+                entity.setLife(false);
+            }
+        }
+    }
 
     private void killOneal(Entity entity) {
         if (count_kill % 16 == 0) {
             if (swap_kill == 1) {
                 entity.setImg(Sprite.oneal_dead.getFxImage());
                 swap_kill = 2;
-            } else if (swap_kill == 2) {
+            }
+            else if (swap_kill == 2) {
                 entity.setImg(Sprite.player_dead3.getFxImage());
                 swap_kill = 3;
-            } else {
+            }
+            else {
                 entity.setLife(false);
                 entities.remove(entity);
                 swap_kill = 1;
@@ -45,25 +55,29 @@ public class Oneal extends Entity {
 
     @Override
     public void update() {
+        kill();
         count_kill++;
-        for (Entity entity : entities) {
+        for (int i = 0; i < entities.size(); ++i) {
+            Entity entity = entities.get(i);
             if (entity instanceof Oneal && !entity.life)
                 killOneal(entity);
         }
 
-        if (this.y % 32 == 0 && this.x % 32 == 0) {
+        if (this.y % 16 == 0 && this.x % 16 == 0 && this.life) {
             if (bomberman.getX() < this.x) {
-                Component.left(this);
+                ComponentMovement.left(this);
             }
             if (bomberman.getX() > this.x) {
-                Component.right(this);
+                ComponentMovement.right(this);
             }
             if (bomberman.getY() > this.y) {
-                Component.down(this);
+                ComponentMovement.down(this);
             }
             if (bomberman.getY() < this.y) {
-                Component.up(this);
+                ComponentMovement.up(this);
             }
         }
+
+//        System.out.println("Oneal: " + this.getX() + " " + this.getY());
     }
 }

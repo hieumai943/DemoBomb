@@ -1,5 +1,6 @@
-package bomberman.entities;
+package bomberman.entities.object;
 
+import bomberman.entities.Entity;
 import javafx.scene.image.Image;
 
 public class Grass extends Entity {

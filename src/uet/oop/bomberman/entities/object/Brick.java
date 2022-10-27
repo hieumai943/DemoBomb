@@ -1,13 +1,14 @@
-package bomberman.entities;
+package bomberman.entities.object;
 
+import bomberman.entities.Entity;
 import bomberman.graphics.Sprite;
 
 import javafx.scene.image.Image;
 
-import static bomberman.view.BombermanGame.list_kill;
-import static bomberman.view.BombermanGame.stillObjects;
+import static bomberman.BombermanGame.list_kill;
+import static bomberman.BombermanGame.stillObjects;
 
-public class Brick  extends  Entity{
+public class Brick  extends Entity {
     public Brick(int x, int y, Image img) {     // Create a contructor of the Brick class
         super(x, y, img);
     }

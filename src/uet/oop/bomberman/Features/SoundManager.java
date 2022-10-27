@@ -4,7 +4,7 @@ import javax.sound.sampled.*;
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
-import static bomberman.view.BombermanGame.*;
+import static bomberman.BombermanGame.*;
 import static bomberman.Levels.NextLevel.*;
 public class SoundManager extends JFrame {
     public static Clip title_screen;

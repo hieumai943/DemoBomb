@@ -1,11 +1,11 @@
 package bomberman.view;
 
 
+import bomberman.BombermanGame;
 import bomberman.model.Instruction;
 import bomberman.model.MenuButton;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -16,20 +16,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 
-import javax.sound.sampled.Clip;
 import java.io.File;
 import java.io.FileInputStream;
 
-import java.io.FileNotFoundException;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 

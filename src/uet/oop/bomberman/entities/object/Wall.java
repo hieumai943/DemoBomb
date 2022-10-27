@@ -1,8 +1,9 @@
-package bomberman.entities;
+package bomberman.entities.object;
 
+import bomberman.entities.Entity;
 import javafx.scene.image.Image;
 
-public class Wall extends Entity{
+public class Wall extends Entity {
     public Wall(int x, int y, Image img) {
         super(x, y, img);
     }

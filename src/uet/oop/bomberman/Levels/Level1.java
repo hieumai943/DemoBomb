@@ -1,19 +1,17 @@
 package bomberman.Levels;
 
-import bomberman.entities.Ballom;
+import bomberman.entities.enemy.Ballom;
 import bomberman.entities.Entity;
-import bomberman.entities.Oneal;
+import bomberman.entities.enemy.Oneal;
 import bomberman.graphics.MapCreation;
 import bomberman.graphics.Sprite;
 
 
-import java.io.FileNotFoundException;
-
-import static bomberman.view.BombermanGame.*;
-import static bomberman.view.BombermanGame.entities;
+import static bomberman.BombermanGame.*;
+import static bomberman.BombermanGame.entities;
 import static bomberman.entities.Bomber.*;
 import static bomberman.entities.Bomb.*;
-import static bomberman.entities.items.SpeedItem.*;
+
 public class Level1 {
 
          public Level1() {

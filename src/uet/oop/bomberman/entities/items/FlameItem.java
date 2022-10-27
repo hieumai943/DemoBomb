@@ -5,8 +5,8 @@ import bomberman.entities.Entity;
 import bomberman.graphics.Sprite;
 import javafx.scene.image.Image;
 
-import static bomberman.view.BombermanGame.stillObjects;
-import static bomberman.view.BombermanGame.*;
+import static bomberman.BombermanGame.stillObjects;
+import static bomberman.BombermanGame.*;
 
 
 public class FlameItem  extends Items{
