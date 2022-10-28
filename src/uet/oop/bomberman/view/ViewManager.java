@@ -35,7 +35,7 @@ public class ViewManager {
     private  ImageView bgrimg;
     private AnchorPane mainPane;
     private Scene mainScene;
-    private Stage mainStage;
+    public static Stage mainStage;
     private static final int MENU_START_X = 150;
     private static final int MENU_START_Y = 150;
     private Instruction hdscreen;
@@ -127,8 +127,8 @@ public class ViewManager {
 
     private void createScreen() {
         try {
-            hdscreen = new Instruction("src\\uet\\resources\\Instruction.png");
-            highscreen = new Instruction("src\\uet\\resources\\instruction.jpg");
+            hdscreen = new Instruction("res\\Instruction.png");
+            highscreen = new Instruction("res\\instruction.jpg");
 
 
         } catch (Exception e) {
@@ -214,7 +214,7 @@ public class ViewManager {
     }
 
     private void createBackGround() throws Exception {
-         bgrImg = new Image(new FileInputStream("src\\uet\\resources\\bgr.gif"), 1000, 650, false, true);
+         bgrImg = new Image(new FileInputStream("res\\bgr.gif"), 1000, 650, false, true);
          bgrimg = new ImageView(bgrImg);
         BackgroundImage bg = new BackgroundImage(bgrImg, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(1000, 650, false, false, false, false));
         mainPane.setBackground(new Background(bg));
@@ -234,7 +234,7 @@ public class ViewManager {
 
 
     private void creatImgBgr() throws Exception {
-        Image logo = new Image(new FileInputStream("src\\uet\\resources\\menuImg.png"));
+        Image logo = new Image(new FileInputStream("res\\menuImg.png"));
         ImageView img = new ImageView();
         img.setImage(logo);
 
@@ -246,7 +246,7 @@ public class ViewManager {
     }
 
     private void creatWordBgr() throws Exception {
-        Image logo = new Image(new FileInputStream("src\\uet\\resources\\bomber (2).png"));
+        Image logo = new Image(new FileInputStream("res\\bomber (2).png"));
         ImageView img = new ImageView();
         img.setImage(logo);
 

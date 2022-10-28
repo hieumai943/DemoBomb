@@ -2,9 +2,11 @@ package bomberman;
 
 
 
+import bomberman.Levels.Level1;
 import bomberman.components.ComponentMovement;
 import bomberman.entities.*;
 
+import bomberman.entities.object.Portal;
 import bomberman.graphics.Sprite;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
@@ -23,7 +25,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static bomberman.Levels.NextLevel.waitToLevelUp;
+import static bomberman.Levels.NextLevel.*;
+import static bomberman.entities.object.Portal.is_portal;
+import static bomberman.view.ViewManager.mainStage;
 
 
 public class BombermanGame  {
@@ -44,16 +48,16 @@ public class BombermanGame  {
     public static String[][] string_id_objects;
     public static boolean running;
     //
-    public static int level;
+    public static int level =1;
 
     private Scene mainScene;
     public static Entity bomberman;
     private GraphicsContext gc;
     private Canvas canvas;
-
+    public static ImageView img;
     public static final List<Entity> entities = new ArrayList<>();
     public static final List<Entity> stillObjects = new ArrayList<>();
-
+    public static Group root = new Group();
     public Scene getMainScene() {
         return mainScene;
     }
@@ -65,7 +69,7 @@ public class BombermanGame  {
 
 
         // Tao root container
-        Group root = new Group();
+
         root.getChildren().add(canvas);
 
         // Tao mainScene
@@ -78,11 +82,11 @@ public class BombermanGame  {
         fade.play();
         FadeTransition fadeTransition = new FadeTransition();
         try {
-            Image logo = new Image(new FileInputStream("res\\textures\\Level-01.png"));
-            ImageView img = new ImageView();
+            Image logo = new Image(new FileInputStream("res\\Level1.png"));
+            img = new ImageView();
             img.setImage(logo);
-            img.setLayoutX(230);
-            img.setLayoutY(100);
+            img.setLayoutX(0);
+            img.setLayoutY(0);
             root.getChildren().add(img);
 
             fadeTransition.setDuration(Duration.millis(4000));
@@ -122,12 +126,15 @@ public class BombermanGame  {
     }
 
     public void createMap() {
-        waitToLevelUp();
+        new Level1();
+
+        running =true;
+
     }
 
     // moves the bomberman.
     private void updatePlayerInput() {
-        // KeyPressed
+        // KeyPsed
         mainScene.setOnKeyPressed(event -> {
             KeyCode key = event.getCode();
 
@@ -143,9 +150,12 @@ public class BombermanGame  {
             } else if (key == KeyCode.S || key == KeyCode.DOWN) {
                 // bomberman.setVelY(5);
                 ComponentMovement.down(bomberman);
+
             }
             else if (key == KeyCode.SPACE) {
                 Bomb.putBomb();
+                entities.clear();
+
 //                System.out.println(bomberman.getX() + " " + bomberman.getY());
             }
         });
@@ -177,6 +187,15 @@ public class BombermanGame  {
                 a.setCountToRun(0);
             }
         }
+        if (entities.size() == 0 && !is_portal && ! wait) {
+            Entity portal = new Portal(1, 3, Sprite.portal.getFxImage());
+            stillObjects.add(portal);
+            if (bomberman.getX() / 32 == portal.getX() / 32 && bomberman.getY() / 32 == portal.getY() / 32) {
+                wait = true;
+                waiting_time = System.currentTimeMillis();
+            }
+        }
+        waitToLevelUp(mainStage);
     }
 
     public void render() {

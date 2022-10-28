@@ -5,7 +5,10 @@ import bomberman.entities.Entity;
 import bomberman.entities.enemy.Oneal;
 import bomberman.graphics.MapCreation;
 import bomberman.graphics.Sprite;
+import javafx.scene.image.Image;
 
+
+import java.io.FileInputStream;
 
 import static bomberman.BombermanGame.*;
 import static bomberman.BombermanGame.entities;
@@ -20,12 +23,13 @@ public class Level1 {
 
             swap_kill = 1;
             try {
-                new MapCreation("res/levels/TestMap.txt");
+                new MapCreation("Level1.txt");
             }catch (Exception e){}
             bomberman.setX(32);
             bomberman.setY(32);
             bomberman.setLife(true);
             is_bomb = 0;
+            speed =1;
 
             Entity enemy1 = new Ballom(4, 4, Sprite.balloom_left1.getFxImage());
             Entity enemy2 = new Ballom(9, 9, Sprite.balloom_left1.getFxImage());

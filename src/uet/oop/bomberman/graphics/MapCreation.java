@@ -3,6 +3,8 @@ package bomberman.graphics;
 
 
 import bomberman.entities.*;
+import bomberman.entities.items.FlameItem;
+import bomberman.entities.items.SpeedItem;
 import bomberman.entities.object.Brick;
 import bomberman.entities.object.Grass;
 import bomberman.entities.object.Portal;
@@ -22,7 +24,7 @@ import static bomberman.BombermanGame.*;
 public class MapCreation  {
     public MapCreation(String level) throws FileNotFoundException {
         System.out.println(System.getProperty("user.dir"));
-        String path = getClass().getResource("Level1.txt").getPath();
+        String path = getClass().getResource(level).getPath();
         File fileName = new File (path);                     // Create object fileName from class File in File library imported.
         try (FileReader inputFile = new FileReader(fileName)) {     // Try to create new object from class FileReader.
             Scanner ip = new Scanner(inputFile);                    // Create object ip from class Scanner.
@@ -63,6 +65,12 @@ public class MapCreation  {
                                 break;
                             case 3:
                                 entity = new Brick(j, i, Sprite.brick.getFxImage());        // In case 3, set entity object equal to object brick with scaled size.
+                                break;
+                            case 6:
+                                entity = new SpeedItem(j, i, Sprite.brick.getFxImage());
+                                break;
+                            case 7:
+                                entity = new FlameItem(j, i, Sprite.brick.getFxImage());
                                 break;
                             default:
                                 entity = new Grass(j, i, Sprite.grass.getFxImage());

@@ -5,10 +5,13 @@ import bomberman.entities.Entity;
 import bomberman.entities.enemy.Doll;
 import bomberman.entities.enemy.Kondoria;
 import bomberman.entities.enemy.Oneal;
+
+import static bomberman.entities.items.SpeedItem.speed;
+
 public class ComponentMovement {
     public static void checkRun(Entity entity) {    //Check if all your mob move or not
         if (entity instanceof Bomber && entity.getCount() > 0) {
-            setDirection(entity.getDirection(), entity, 8);
+            setDirection(entity.getDirection(), entity, 8* speed);
             entity.setCount(entity.getCount() - 1);
         }
         if ((entity instanceof Ballom || entity instanceof Oneal
@@ -44,7 +47,7 @@ public class ComponentMovement {
         if (entity.getY() % 32 == 0 && entity.getX() % 32 == 0) {
             if (entity instanceof Bomber && Blocked.block_down(entity)) {
                 entity.setDirection("down");
-                entity.setCount(4);
+                entity.setCount(4 / speed);
                 checkRun(entity);
             }
             if ((entity instanceof Ballom || entity instanceof Oneal || entity instanceof Doll)
@@ -59,7 +62,7 @@ public class ComponentMovement {
         if (entity.getY() % 32 == 0 && entity.getX() % 32 == 0) {
             if (entity instanceof Bomber && Blocked.block_up(entity)) {
                 entity.setDirection("up");
-                entity.setCount(4);
+                entity.setCount(4/ speed);
                 checkRun(entity);
             }
             if ((entity instanceof Ballom || entity instanceof Oneal || entity instanceof Doll)
@@ -74,7 +77,7 @@ public class ComponentMovement {
         if (entity.getX() % 32 == 0 && entity.getY() % 32 == 0) {
             if (entity instanceof Bomber && Blocked.block_left(entity)) {
                 entity.setDirection("left");
-                entity.setCount(4);
+                entity.setCount(4 / speed);
                 checkRun(entity);
             }
             if ((entity instanceof Ballom || entity instanceof Oneal
@@ -90,7 +93,7 @@ public class ComponentMovement {
         if (entity.getX() % 32 == 0 && entity.getY() % 32 == 0) {
             if (entity instanceof Bomber && Blocked.block_right(entity)) {
                 entity.setDirection("right");
-                entity.setCount(4);
+                entity.setCount(4 / speed);
                 checkRun(entity);
             }
             if ((entity instanceof Ballom || entity instanceof Oneal
