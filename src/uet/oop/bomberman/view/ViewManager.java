@@ -51,8 +51,7 @@ public class ViewManager {
     private int count =0;
 
     public void music() throws Exception {
-        String path = getClass().getResource("bgr.mp3").getPath();
-        Media h = new Media(new File(path).toURI().toString());
+        Media h = new Media(new File("res/textures/bgr.mp3").toURI().toString());
         mediaPlayer = new MediaPlayer(h);
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         if(count%2==0) mediaPlayer.play();
@@ -127,8 +126,8 @@ public class ViewManager {
 
     private void createScreen() {
         try {
-            hdscreen = new Instruction("res\\Instruction.png");
-            highscreen = new Instruction("res\\instruction.jpg");
+            hdscreen = new Instruction("res\\textures\\Instruction.png");
+            highscreen = new Instruction("res\\textures\\instruction.jpg");
 
 
         } catch (Exception e) {
@@ -214,7 +213,7 @@ public class ViewManager {
     }
 
     private void createBackGround() throws Exception {
-         bgrImg = new Image(new FileInputStream("res\\bgr.gif"), 1000, 650, false, true);
+         bgrImg = new Image(new FileInputStream("res\\textures\\bgr.gif"), 1000, 650, false, true);
          bgrimg = new ImageView(bgrImg);
         BackgroundImage bg = new BackgroundImage(bgrImg, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(1000, 650, false, false, false, false));
         mainPane.setBackground(new Background(bg));
@@ -234,7 +233,7 @@ public class ViewManager {
 
 
     private void creatImgBgr() throws Exception {
-        Image logo = new Image(new FileInputStream("res\\menuImg.png"));
+        Image logo = new Image(new FileInputStream("res\\textures\\menuImg.png"));
         ImageView img = new ImageView();
         img.setImage(logo);
 
@@ -246,7 +245,7 @@ public class ViewManager {
     }
 
     private void creatWordBgr() throws Exception {
-        Image logo = new Image(new FileInputStream("res\\bomber (2).png"));
+        Image logo = new Image(new FileInputStream("res\\textures\\bomber (2).png"));
         ImageView img = new ImageView();
         img.setImage(logo);
 

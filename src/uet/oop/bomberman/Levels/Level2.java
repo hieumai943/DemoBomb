@@ -20,7 +20,7 @@ public class Level2 {
         swap_kill = 1;
         try {
             new MapCreation("Level2.txt");
-        } catch (FileNotFoundException e){}
+        } catch (Exception e){}
         bomberman.setLife(true);
         bomberman.setX(32);
         bomberman.setY(32);

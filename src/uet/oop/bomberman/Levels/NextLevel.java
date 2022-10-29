@@ -35,16 +35,17 @@ public class NextLevel {
 
                 long now = System.currentTimeMillis();
                 if(now - waiting_time <=2000) {
-                    Up = new Image(new FileInputStream("res\\Trans.jpg"));
+                    Up = new Image(new FileInputStream("res\\Trans\\Trans.jpg"));
+
                 }
                 else {
                     if(level ==1 )
-                    Up = new Image(new FileInputStream("res\\Level2.png"));
+                    Up = new Image(new FileInputStream("res\\Trans\\Level2.png"));
                     if(level ==2){
-                        Up = new Image(new FileInputStream("res\\Level3.png"));
+                        Up = new Image(new FileInputStream("res\\Trans\\Level3.png"));
                     }
                     if(level ==3){
-                        Up = new Image(new FileInputStream("res\\Level1.png"));
+                        Up = new Image(new FileInputStream("res\\Trans\\Level1.png"));
                     }
                 }
 

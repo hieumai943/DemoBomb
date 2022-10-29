@@ -82,7 +82,7 @@ public class BombermanGame  {
         fade.play();
         FadeTransition fadeTransition = new FadeTransition();
         try {
-            Image logo = new Image(new FileInputStream("res\\Level1.png"));
+            Image logo = new Image(new FileInputStream("res\\Trans\\Level1.png"));
             img = new ImageView();
             img.setImage(logo);
             img.setLayoutX(0);
