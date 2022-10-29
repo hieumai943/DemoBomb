@@ -3,6 +3,10 @@ package bomberman.entities;
 
 import bomberman.graphics.Sprite;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+import java.io.FileInputStream;
+
 import static bomberman.BombermanGame.*;
 
 public class Bomber  extends Entity {
@@ -72,7 +76,17 @@ public class Bomber  extends Entity {
         checkBombs();
         checkEnemy3();
         count_kill++;
-        if (!this.life)
+        if (!this.life) {
             killBomber(this);
+             Image OverImg;
+             ImageView Overimg;
+             try {
+                 OverImg = new Image(new FileInputStream("res\\textures\\Pause.jpg"), 800, 480, false, true);
+                 Overimg = new ImageView(OverImg);
+                 Overimg.setLayoutX(0);
+                 Overimg.setLayoutY(0);
+                 root.getChildren().add(Overimg);
+             }catch (Exception e){}
+        }
     }
 }

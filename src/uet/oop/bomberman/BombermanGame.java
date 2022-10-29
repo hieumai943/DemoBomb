@@ -8,8 +8,8 @@ import bomberman.entities.*;
 
 import bomberman.entities.object.Portal;
 import bomberman.graphics.Sprite;
-import javafx.animation.AnimationTimer;
-import javafx.animation.FadeTransition;
+import bomberman.view.PauseMenu;
+import javafx.animation.*;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -22,13 +22,14 @@ import javafx.util.Duration;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 
 import static bomberman.Levels.NextLevel.*;
 import static bomberman.entities.object.Portal.is_portal;
 import static bomberman.view.ViewManager.mainStage;
-
+import static bomberman.entities.items.SpeedItem.*;
 
 public class BombermanGame  {
 
@@ -36,6 +37,7 @@ public class BombermanGame  {
     public static final int HEIGHT = 15;
     //
     public static int width = 0;
+    public static boolean pauseMenu = false;
     //
     public static int height = 0;
     //
@@ -49,6 +51,7 @@ public class BombermanGame  {
     public static boolean running;
     //
     public static int level =1;
+    private Timeline timeline;
 
     private Scene mainScene;
     public static Entity bomberman;
@@ -61,6 +64,8 @@ public class BombermanGame  {
     public Scene getMainScene() {
         return mainScene;
     }
+    private Timeline t;
+
 
     public void createGame(Stage stage) {
         // Tao Canvas
@@ -80,6 +85,10 @@ public class BombermanGame  {
         fade.setToValue(1);
         fade.setNode(root);
         fade.play();
+        SequentialTransition seqTransition = new SequentialTransition(root,new PauseTransition(Duration.millis(2000)));
+
+        //Playing Sequential Transition
+        seqTransition.play();
         FadeTransition fadeTransition = new FadeTransition();
         try {
             Image logo = new Image(new FileInputStream("res\\Trans\\Level1.png"));
@@ -141,22 +150,30 @@ public class BombermanGame  {
             if (key == KeyCode.A || key == KeyCode.LEFT) {
                 // bomberman.setVelX(-5);
                 ComponentMovement.left(bomberman);
-            } else if (key == KeyCode.D || key == KeyCode.RIGHT) {
+            } else if (key == KeyCode.D || key == KeyCode.RIGHT ) {
                 // bomberman.setVelX(5);
                 ComponentMovement.right(bomberman);
-            } else if (key == KeyCode.W || key == KeyCode.UP) {
+            } else if (key == KeyCode.W || key == KeyCode.UP ) {
                 // bomberman.setVelY(-5);
                 ComponentMovement.up(bomberman);
             } else if (key == KeyCode.S || key == KeyCode.DOWN) {
                 // bomberman.setVelY(5);
                 ComponentMovement.down(bomberman);
-
             }
             else if (key == KeyCode.SPACE) {
                 Bomb.putBomb();
-                entities.clear();
+
 
 //                System.out.println(bomberman.getX() + " " + bomberman.getY());
+            }
+            else if(key == KeyCode.ESCAPE){
+                pauseMenu = true;
+                PauseMenu pause = new PauseMenu();
+                pause.showPause();
+
+
+
+                
             }
         });
     }

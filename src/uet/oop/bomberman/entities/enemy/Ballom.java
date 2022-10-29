@@ -76,6 +76,7 @@ public class Ballom extends Entity {
         for (Entity entity : entities) {
             if (list_kill[entity.getX() / 32][entity.getY() / 32] == 4) {
                 entity.setLife(false);
+
             }
         }
     }
